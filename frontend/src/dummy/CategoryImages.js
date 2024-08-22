@@ -1,0 +1,18 @@
+export const categoryImages = {
+   plumbing: '/assets/plumbing.jpg',
+   electrical: '/assets/electrical.jpg',
+   painting: '/assets/painting.jpg',
+   carpenter: '/assets/carpenter.jpg',
+   transportation: '/assets/transportation.jpg',
+   'aluminium-works': '/assets/aluminium-works.jpg',
+   'home-appliance': '/assets/home-appliance.jpg',
+   'civil-works': '/assets/civil-works.jpg',
+   'computer-hardware': '/assets/computer-hardware.jpg',
+   welding: '/assets/welding.jpg',
+   'cc-camera-security-and-networking': '/assets/cc-camera-security-and-networking.jpg',
+   'air-condition-and-cooling': '/assets/air-condition-and-cooling.jpg',
+   'cleaning-and-laundry': '/assets/cleaning-and-laundry.jpg',
+   'solar-water': '/assets/solar-water.jpg',
+   'power-backup': '/assets/power-backup.jpg',
+   'water-purify': '/assets/water-purify.jpg',
+ };
