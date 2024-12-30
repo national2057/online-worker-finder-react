@@ -1,60 +1,3 @@
-// import React from 'react';
-// import { Route, Routes } from 'react-router-dom';
-// import RootLayOut from './pages/RootLayout';
-// import Dashboard from './dashboard/Dashboard';
-// import About from './pages/About';
-// import Services from './pages/Services';
-// import Contact from './pages/Contact';
-// import CategoryPage from './pages/CategoryPage';
-// import Login from './authPages/Login';
-// import Signup from './authPages/Signup';
-// import TermsAndConditions from './terms-and-policy/TermsAndConditions';
-// import PrivacyPolicy from './terms-and-policy/PrivacyPolicy';
-
-// import AdminDashboard from './admin/admin-pages/AdminDashboard';
-// import AdminLayOut from './admin/admin-pages/AdminLayOut';
-// import JobTable from './admin/admin-tables/JobTable';
-
-
-// function App() {
-//    return (
-//       <Routes>
-//          <Route path="/" element={<RootLayOut />}>
-//             <Route index element={<Dashboard />} />
-//             <Route path="/natservices/about" element={<About />} />
-//             <Route path="/natservices/services" element={<Services />} />
-//             <Route path="/natservices/services/:topic" element={<Services />} />
-//             <Route path="/natservices/contact" element={<Contact />} />
-//             <Route path="/category/:topic" element={<CategoryPage />} />
-
-//             {/* Terms and Policy */}
-//             <Route path="/natservices/terms-conditions" element={<TermsAndConditions />} />
-//             <Route path="/natservices/privacy-policy" element={<PrivacyPolicy />} />
-
-
-//             {/* Admin Routes */}
-//             <Route path="/admin" element={<AdminLayOut />}>
-//                <Route index element={<AdminDashboard />} />
-//                <Route path="/admin/jobs" element={<JobTable />} />
-//                {/* <Route path="/admin/services" element={<Services />} /> */}
-//                {/* <Route path="users" element={<Workers />} /> */}
-//             </Route>
-
-
-//             {/* Auth Routes */}
-//             <Route path="/login" element={<Login />} />
-//             <Route path="/signup" element={<Signup />} />
-//          </Route>
-//       </Routes>
-//    );
-// }
-
-// export default App;
-
-
-
-
-
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import RootLayOut from './pages/RootLayout';
@@ -63,8 +6,9 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
 import CategoryPage from './pages/CategoryPage';
-import Login from './authPages/Login';
 import Signup from './authPages/Signup';
+import Login from './authPages/Login';
+import Profile from './pages/Profile';
 import TermsAndConditions from './terms-and-policy/TermsAndConditions';
 import PrivacyPolicy from './terms-and-policy/PrivacyPolicy';
 
@@ -83,6 +27,10 @@ import WorkerProfile from './worker/worker-profile/WorkerProfile';
 import ApprovedJobs from './worker/worker-tables/ApprovedJobs';
 import WorkerJobView from './worker/worker-tables/WorkerJobView';
 import CustomerDetails from './worker/worker-tables/CustomerDetails';
+import { AdminLogin, AdminSignup } from './admin/admin-auth/AdminAuthPage';
+import PendingRequests from './worker/worker-tables/PendingRequests';
+import CategoryTable from './admin/admin-tables/CategoryTable';
+import JobDescription from './worker/worker-pages/JobDescription';
 
 function App() {
    const [jobs, setJobs] = useState([]);
@@ -102,6 +50,7 @@ function App() {
             {/* Auth Routes */}
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
+            <Route path="natservices/user/profile" element={<Profile />} />
          </Route>
 
          {/* Admin Routes with AdminLayOut */}
@@ -110,18 +59,23 @@ function App() {
             <Route path="jobs" element={<JobTable />} />
             <Route path="job-view" element={<JobView />} />
             <Route path="job-edit/:id" element={<JobEdit jobs={jobs} setJobs={setJobs} />} />
+            <Route path="categories" element={<CategoryTable />} />
             <Route path="workers" element={<WorkerTable />} />
             <Route path="customers" element={<CustomerTable />} />
+            <Route path="login" element={<AdminLogin />} />
+            <Route path="signup" element={<AdminSignup />} />
          </Route>
 
          {/* Worker Routes with WorkerLayOut */}
          <Route path="/worker" element={<WorkerLayOut />}>
             <Route index element={<WorkerDashboard />} />
-            <Route path="jobs" element={<WorkerJobTable />} />
-            <Route path="job-view" element={<WorkerJobView />} />
+            <Route path="job-description/:id" element={<JobDescription />} />
+            <Route path="all-jobs" element={<WorkerJobTable />} />
+            <Route path="job-view/:id" element={<WorkerJobView />} />
             <Route path="job-edit/:id" element={<JobEdit jobs={jobs} setJobs={setJobs} />} />
+            <Route path="pending-requests" element={<PendingRequests />} />
             <Route path="approved-jobs" element={<ApprovedJobs />} />
-            <Route path="customer-details-view" element={<CustomerDetails />} />
+            <Route path="customer-details" element={<CustomerDetails />} />
             <Route path="profile" element={<WorkerProfile />} />
          </Route>
       </Routes>

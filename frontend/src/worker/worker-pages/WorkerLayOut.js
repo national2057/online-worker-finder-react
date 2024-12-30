@@ -2,8 +2,10 @@ import React from 'react';
 import WorkerNavbar from '../worker-components/WorkerNavbar';
 import WorkerSidebar from '../worker-components/WorkerSidebar';
 import { Outlet } from 'react-router-dom';
+import useGetAllJobs from '../../hooks/useGetAllJobs';
 
 const WorkerLayOut = () => {
+   useGetAllJobs();
    return (
       <div className="flex flex-row md:flex-row min-h-screen">
          <aside className="w-2/10 md:w-64 bg-gray-800 text-white sticky top-0">

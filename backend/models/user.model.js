@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-// const {Schema} = mongoose;
+const { Schema } = mongoose;
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     fullName: { type: String, required: true },
     email: {
@@ -15,21 +15,35 @@ const userSchema = new mongoose.Schema(
       },
       required: true,
     },
-    phone: { type: Number, required: true },
-    address: { type: String, required: true },
-    password: { type: String, require: true },
-    confirm_password: { type: String, require: true },
-    role: { type: String, enum: ["Customer", "Worker"], require: true },
+    phone: { type: String, required: true },
+    address: { type: String },
+    password: { type: String, required: true },
+    role: {
+      type: String,
+      enum: ["customer", "worker", "admin"],
+      required: true,
+    },
     profile: {
-      bio: {type: String},
-      fullName: {type: String, require: true},
-      phone: {type: Number, require: true},
-      category: {type: String, require: true},
-      experience: {type: String },
-      profilePhoto: {type: String, default: ''},
+      bio: { type: String },
+      category: { type: String },
+      experience: { type: String },
+      profilePhoto: { type: String },
+      rating: { type: String},
     },
   },
   { timestamps: true }
 );
+
+// const virtual = userSchema.virtual("id");
+// virtual.get(function () {
+//   return this._id;
+// });
+// userSchema.set("toJSON", {
+//   virtuals: true,
+//   versionKey: false,
+//   transform: function (doc, ret) {
+//     ret._id;
+//   },
+// });
 
 exports.User = mongoose.model("User", userSchema);

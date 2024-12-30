@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaHome, FaUser, FaCog, FaBriefcase, FaCaretDown, FaCaretUp } from 'react-icons/fa';
+import { FaHome, FaUser, FaBriefcase, FaCaretDown, FaCaretUp, FaList } from 'react-icons/fa';
 import { FaXmark, FaBars } from "react-icons/fa6";
 
 
@@ -9,9 +9,9 @@ const Sidebar = () => {
     const [isUsersOpen, setIsUsersOpen] = useState(false); // State to toggle Users dropdown
 
     return (
-        <div className={`bg-gray-800 text-white h-screen p-5 ${isOpen ? 'w-64' : 'w-16'} duration-300 sticky top-0`}>
+        <div className={`bg-gray-800 text-white h-screen p-5 ${isOpen ? 'w-64' : 'w-20'} duration-300 sticky top-0`}>
             <button 
-                className="absolute top-7 right-0 text-white focus:outline-none flex items-center"
+                className="absolute top-7 right-1 text-white focus:outline-none flex items-center"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 {isOpen ? <FaXmark /> : <FaBars />}
@@ -28,6 +28,11 @@ const Sidebar = () => {
                 <NavLink to="/admin/jobs" className="flex items-center space-x-2">
                     <FaBriefcase className="text-lg"/>
                     {isOpen && <span>Jobs</span>}
+                </NavLink>
+
+                <NavLink to="/admin/categories" className="flex items-center space-x-2">
+                    <FaList className="text-lg"/>
+                    {isOpen && <span>Categories</span>}
                 </NavLink>
 
                 <div className="flex flex-col space-y-2">
@@ -49,12 +54,7 @@ const Sidebar = () => {
                             </NavLink>
                         </div>
                     )}
-                </div>
-                
-                <NavLink to="/admin/settings" className="flex items-center space-x-2">
-                    <FaCog className="text-lg"/>
-                    {isOpen && <span>Settings</span>}
-                </NavLink>
+                </div>                
             </div>
         </div>
     );
