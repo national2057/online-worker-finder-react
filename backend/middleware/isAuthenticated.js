@@ -10,7 +10,6 @@ const isAuthenticated = async (req, res, next) => {
         success: false,
       });
     }
-
     // Verify token
     const decoded = await jwt.verify(token, process.env.SECRET_KEY);
     if (!decoded) {
@@ -19,11 +18,9 @@ const isAuthenticated = async (req, res, next) => {
         success: false,
       });
     }
-
     // Attach userId to request object
     req.id = decoded.userId;
     next();
-
   } catch (error) {
     // Handle any errors
     console.log(error);

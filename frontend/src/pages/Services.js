@@ -41,7 +41,6 @@ const Services = () => {
 
          <div className="container mx-auto py-8 px-10">
             <h1 className="text-5xl font-bold my-6 text-center mb-16">Service Categories</h1>
-
             <div className="flex flex-wrap md:flex-nowrap">
                <div className="flex flex-wrap md:flex-nowrap">
                   <div className="w-1/4 md:w-1/4 lg:w-1/3 p-4">

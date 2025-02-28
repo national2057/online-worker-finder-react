@@ -5,47 +5,48 @@ const { User } = require("../models/user.model");
 const getDataUri = require("../utils/dataUri");
 const cloudinary = require("../utils/cloudinary");
 
-// // Register..
-// exports.registerUser = async (req, res) => {
-//   try {
-//     const { fullName, email, phone, password, role } = req.body;
-//     console.log(fullName, email, phone, password, role);
+// Register...  - for Admin
+exports.registerAdmin = async (req, res) => {
+  try {
+   console.log("Request body:", req.body); // Debug log
+    const { fullName, email, phone, password, role } = req.body;
+    if (!fullName || !email ||!phone || !password || !role) {
+      return res.status(400).json({
+        message: "Something is missing!!!",
+        success: false,
+      });
+    };
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({
+        message: "Admin already exist with this email.",
+        success: false,
+      });
+    };
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await User.create({
+      fullName,
+      email,
+      phone,
+      password: hashedPassword,
+      role,
+    });
+   //  console.log(user);
+    return res.status(201).json({
+      message: "Account created successfully.",
+      success: true,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Failed to register Admin.",
+      success: false,
+      error: error.message,
+    });
+  };
+};
 
-//     if (!fullName || !email || !phone || !password || !role) {
-//       return res.status(400).json({
-//         message: "Something is missing!!!",
-//         success: false,
-//       });
-//     }
-//     const user = await User.findOne({ email });
-//     if (user) {
-//       return res.status(400).json({
-//         message: "User already exist with this email.",
-//         success: false,
-//       });
-//     }
-//     const hashedPassword = await bcrypt.hash(password, 10);
-//     await User.create({
-//       fullName,
-//       email,
-//       phone,
-//       password: hashedPassword,
-//       role,
-//     });
-//     return res.status(201).json({
-//       message: "Account created successfully.",
-//       success: true,
-//     });
-//   } catch (error) {
-//     res.status(400).json({
-//       message: "Failed to register user.",
-//       success: false,
-//       error: error.message,
-//     });
-//   }
-// };
-
-// Register..
+// Register...  - for Customer & Worker
 exports.registerUser = async (req, res) => {
   try {
     const { fullName, email, phone, address, password, role } = req.body;
@@ -54,8 +55,7 @@ exports.registerUser = async (req, res) => {
         message: "Something is missing!!!",
         success: false,
       });
-    }
-
+    };
     const file = req.file;
     const fileUri = getDataUri(file);
     const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
@@ -66,7 +66,7 @@ exports.registerUser = async (req, res) => {
         message: "User already exist with this email.",
         success: false,
       });
-    }
+    };
     const hashedPassword = await bcrypt.hash(password, 10);
     await User.create({
       fullName,
@@ -84,15 +84,16 @@ exports.registerUser = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    res.status(400).json({
+    console.log(error);
+    res.status(500).json({
       message: "Failed to register user.",
       success: false,
       error: error.message,
     });
-  }
+  };
 };
 
-// Login..
+// Login... - for all
 exports.loginUser = async (req, res) => {
   try {
     const { email, password, role } = req.body;
@@ -105,8 +106,8 @@ exports.loginUser = async (req, res) => {
     }
     let user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).status({
-        message: "Incorrect credentials.",
+      return res.status(404).status({
+        message: "User not found.",
         success: false,
         error: error.message,
       });
@@ -118,8 +119,7 @@ exports.loginUser = async (req, res) => {
         success: false,
         error: error.message,
       });
-    }
-
+    };
     // check role is correct or not..
     if (role !== user.role) {
       return res.status(400).json({
@@ -127,8 +127,7 @@ exports.loginUser = async (req, res) => {
         success: false,
         error: error.message,
       });
-    }
-
+    };
     // token generate..
     const tokenData = {
       userId: user._id,
@@ -218,6 +217,7 @@ exports.loginUser = async (req, res) => {
 // };
 
 // Update Profile..
+
 exports.updateProfile = async (req, res) => {
   try {
     const { fullName, email, phone, address, bio, category, experience } =
@@ -360,3 +360,42 @@ exports.deleteUser = async (req, res) => {
     res.status(500).json({ error: "Error deleting user." });
   }
 };
+
+// // Admin Register..
+// exports.registerAdmin = async (req, res) => {
+//   try {
+//     const { fullName, email, password } = req.body;
+//     console.log(fullName, email, password);
+
+//     if (!fullName || !email || !password) {
+//       return res.status(400).json({
+//         message: "Something is missing!!!",
+//         success: false,
+//       });
+//     }
+//     const existingAdmin = await Admin.findOne({ email });
+//     if (existingAdmin) {
+//       return res.status(400).json({
+//         message: "Admin already exist with this email.",
+//         success: false,
+//       });
+//     }
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     await newAdmin.create({
+//       fullName,
+//       email,
+//       password: hashedPassword,
+//     });
+//     return res.status(201).json({
+//       message: "Admin Account created successfully.",
+//       success: true,
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       message: "Failed to Register Admin.",
+//       success: false,
+//       error: error.message,
+//     });
+//   }
+// };

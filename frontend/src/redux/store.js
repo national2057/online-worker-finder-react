@@ -1,4 +1,21 @@
+// import { configureStore } from "@reduxjs/toolkit";
+// import authSlice from "../features/authSlice";
+// import jobSlice from "../features/jobSlice";
+// import categorySlice from "../features/categorySlice";
+// import applicationSlice from "../features/applicationSlice";
+
+// export const store = configureStore({
+//    reducer: {
+//       auth: authSlice,
+//       job: jobSlice,
+//       category: categorySlice,
+//       application: applicationSlice,
+//    },
+// });
+
+
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+// import adminSlice from "../features/adminSlice";
 import authSlice from "../features/authSlice";
 import jobSlice from "../features/jobSlice";
 import categorySlice from "../features/categorySlice";
@@ -21,6 +38,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
+//   admins: adminSlice,
   auth: authSlice,
   job: jobSlice,
   category: categorySlice,
@@ -38,14 +56,3 @@ export const store = configureStore({
       },
     }),
 });
-
-// import { configureStore } from "@reduxjs/toolkit";
-// import authSlice from "../features/auth/authSlice";
-// import jobSlice from "../features/jobs/jobSlice";
-
-// export const store = configureStore({
-//   reducer: {
-//     auth: authSlice,
-//     job: jobSlice,
-//   },
-// });

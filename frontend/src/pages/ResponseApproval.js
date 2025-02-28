@@ -1,7 +1,7 @@
 // import React from 'react';
 // import { useNavigate } from 'react-router-dom';
 
-// const PendingRequests = () => {
+// const ApprovedJobs = () => {
 //    const navigate = useNavigate();
 
 //    const jobs = [
@@ -16,28 +16,14 @@
 //          proposedFees: "$150",
 //          problemDescription: "Broken pipe in the bathroom.",
 //          images: ["image1.jpg", "image2.jpg"],
-//          status: "Pending",
-//          customerDetails: "Some customer details",
-//       },
-//       {
-//          id: 1,
-//          fullName: "Jane Doe",
-//          email: "jane.doe@example.com",
-//          phone: "123-456-7890",
-//          address: "456 Elm St, Othertown, USA",
-//          date: "2024-08-06",
-//          timePeriod: "2:00 PM - 4:00 PM",
-//          proposedFees: "$150",
-//          problemDescription: "Broken pipe in the bathroom.",
-//          images: ["image1.jpg", "image2.jpg"],
-//          status: "Pending",
+//          status: "Accepted",
 //          customerDetails: "Some customer details",
 //       },
 //       // Add more job data as needed
 //    ];
 
 //    const handleViewDetails = (job) => {
-//       navigate('/worker/customer-details-view', { state: { job } });
+//       navigate('/worker/customer-details', { state: { job } });
 //    };
 
 //    return (
@@ -93,7 +79,7 @@
 //    );
 // };
 
-// export default PendingRequests;
+// export default ApprovedJobs;
 
 import * as React from "react";
 import Table from "@mui/material/Table";
@@ -103,17 +89,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import useGetAllJobs from "../../hooks/useGetAllJobs";
+import useGetAllJobs from "../hooks/useGetAllJobs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const WorkerJobTable = () => {
-  //    const params = useParams();
-  //   useGetAllJobs(params.id);
   useGetAllJobs();
-  const { allJobs } = useSelector((store) => store.job);
-  //   const { status } = useSelector((store) => store.applications);
 
+  const { allJobs } = useSelector((store) => store.job);
   const navigate = useNavigate();
 
   const handleViewDetails = (job) => {
@@ -122,7 +105,9 @@ const WorkerJobTable = () => {
 
   return (
     <>
-      <h1 className="font-bold text-3xl my-6 underline">Pending Jobs:</h1>
+      <h1 className="font-bold text-3xl my-6 underline">
+        Approved Jobs:
+      </h1>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -135,14 +120,13 @@ const WorkerJobTable = () => {
               <TableCell align="center">Date</TableCell>
               <TableCell align="center">Description</TableCell>
               <TableCell align="center">Proposed Fees</TableCell>
-              <TableCell align="center">Images</TableCell>
               <TableCell align="center">Status</TableCell>
               <TableCell align="center">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {allJobs.length <= 0 ? (
-              <span>No Any Pending Jobs Left.</span>
+              <span>No Any Poseted Jobs.</span>
             ) : (
               <>
                 {allJobs?.map((job, index) => (
@@ -170,7 +154,6 @@ const WorkerJobTable = () => {
                     </TableCell>
                     <TableCell align="center">{job?.description}</TableCell>
                     <TableCell align="center">{job?.proposedFees}</TableCell>
-                    <TableCell align="center">{job?.images}</TableCell>
                     <TableCell align="center">
                       {job?.applications?.status}
                     </TableCell>

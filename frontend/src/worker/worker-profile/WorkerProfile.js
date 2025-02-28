@@ -4,10 +4,14 @@ import { GrLocation } from "react-icons/gr";
 import { LuContact, LuMail, LuPen } from "react-icons/lu";
 import { Rating, Typography, Box } from "@mui/material";
 import UpdateWorkerProfile from "./UpdateWorkerProfile";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
+
+    const { user } = useSelector((store) => store.auth);
+  
 
   const handleClick = () => {
     setOpen(true);
@@ -19,12 +23,12 @@ const Profile = () => {
           <div className="flex items-center gap-5 pl-5">
             <Avatar
               alt="User Profile"
-              src="assets/avatar.jpg"
+              src={user?.profile?.profilePhoto}
               variant="outline"
               sx={{ width: 150, height: 150 }}
             />
             <div className="ml-32">
-              <h2 className="text-2xl font-bold">Full Name</h2>
+              <h2 className="text-2xl font-bold">{user?.fullName}</h2>
               <h2 className="text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt,
                 excepturi molestiae cupiditate impedit.
@@ -41,24 +45,24 @@ const Profile = () => {
         <div className="my-5 pl-5">
           <div className="flex items-center gap-3 my-2">
             <LuMail />
-            <span>national@gmail.com</span>
+            <span>{user?.email}</span>
           </div>
           <div className="flex items-center gap-3 my-2">
             <LuContact />
-            <span>9812345678</span>
+            <span>{user?.phone}</span>
           </div>
           <div className="flex items-center gap-3 my-2">
             <GrLocation />
-            <span>Lubhu, Lalitpur, Nepal</span>
+            <span>{user?.address}</span>
           </div>
         </div>
         <div className="mb-4 ml-4">
           <h1 className="font-semibold">Category:</h1>
-          <span>- Electrician</span>
+          <span>- {user?.profile?.category}</span>
         </div>
         <div className="mb-4 ml-4">
           <h1 className="font-semibold">Experience:</h1>
-          <span>- 2 Years</span>
+          <span>- {user?.profile?.experience}</span>
         </div>
         <div className="mb-4 ml-4">
           <Box sx={{ "& > legend": { mt: 2 } }}>

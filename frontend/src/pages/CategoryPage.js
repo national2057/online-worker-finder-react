@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import ProblemDesc from '../PostForms/ProblemDesc';
 import { categoryImages } from '../dummy/CategoryImages';
+import ProblemDescription from '../PostForms/ProblemDescription';
 
 
 const CategoryPage = () => {
@@ -27,7 +28,8 @@ const CategoryPage = () => {
           )}
         </div>
         <div className='w-1/2'>
-          <ProblemDesc />
+          {/* <ProblemDesc /> */}
+          <ProblemDescription />
         </div>
       </div>
     </div>

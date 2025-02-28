@@ -1,68 +1,3 @@
-// // src/CustomerTable.js
-// import React from 'react';
-// import { FaEdit, FaTrash } from 'react-icons/fa';
-
-// const data = [
-//   {
-//     id: 1,
-//     fullName: 'John Doe',
-//     email: 'john@example.com',
-//     phone: '123-456-7890',
-//     address: '123 Main St, Anytown, USA',
-//   },
-//   {
-//     id: 2,
-//     fullName: 'Jane Smith',
-//     email: 'jane@example.com',
-//     phone: '987-654-3210',
-//     address: '456 Elm St, Othertown, USA',
-//   },
-//   // Add more data as needed
-// ];
-
-// const CustomerTable = () => {
-//   return (
-//     <div className="overflow-x-auto">
-//       <table className="min-w-full divide-y divide-gray-400">
-//         <thead className="bg-gray-300">
-//           <tr>
-//             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">S.N.</th>
-//             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Full Name</th>
-//             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-//             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-//             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
-//             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-//           </tr>
-//         </thead>
-//         <tbody className="bg-white divide-y divide-gray-300">
-//           {data.map((item, index) => (
-//             <tr key={item.id}>
-//               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{index + 1}</td>
-//               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.fullName}</td>
-//               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.email}</td>
-//               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.phone}</td>
-//               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.address}</td>
-//               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-//                 <button className="text-green-600 hover:text-green-900 mr-4"><FaEdit /></button>
-//                 <button className="text-red-600 hover:text-red-900"><FaTrash /></button>
-//               </td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default CustomerTable;
-
-
-
-
-
-
-
-// src/CustomerTable.js
 import React, { useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
@@ -113,15 +48,16 @@ const CustomerTable = () => {
 
   return (
     <div className="overflow-x-auto">
+      <h1 className='mt-6 mb-10 font-bold text-3xl text-center underline'>Customer's Table List:</h1>
       <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+        <thead className="bg-gray-400 text-black">
           <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">S.N.</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Full Name</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Address</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">S.N.</th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Full Name</th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Email</th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Phone</th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Address</th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">

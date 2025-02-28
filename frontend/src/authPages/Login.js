@@ -256,7 +256,7 @@ const Login = () => {
           {loading ? (
             <button className="flex items-center w-full my-4">
               <RiLoader4Line className="mr-2 h-4 w-4 animate-spin" />
-              <p>Please wait</p>
+              <p>Please wait...</p>
             </button>
           ) : (
             <button

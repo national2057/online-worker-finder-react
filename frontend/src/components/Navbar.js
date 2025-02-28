@@ -26,10 +26,11 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get(`${USER_API_END_POINT}/user/logout`, {
+      const res = await axios.post(`${USER_API_END_POINT}/user/logout`, {
         withCreentials: true,
       });
       if (res.data.success) {
+        setAnchorEl(null); // Close the menu first
         dispatch(setUser(null));
         navigate("/");
         toast.success(res.data.message);
@@ -60,7 +61,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex justify-around items-center gap-8">
-          <ul className="flex justify-around items-center gap-5">
+          <ul className="flex justify-around items-center ">
             <li>
               <NavLink
                 to="/"
@@ -79,6 +80,14 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
+                to="/natservices/contact"
+                className="hover:bg-zinc-700 hover:text-black px-6 py-3 rounded-lg text-xl font-semibold pr-10"
+              >
+                Contact
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/natservices/services"
                 className="hover:bg-zinc-700 hover:text-black px-6 py-3 rounded-lg text-xl font-semibold"
               >
@@ -87,83 +96,100 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/natservices/contact"
-                className="hover:bg-zinc-700 hover:text-black px-6 py-3 rounded-lg text-xl font-semibold pr-10"
+                to="/natservices/job-response"
+                className="hover:bg-zinc-700 hover:text-black px-6 py-3 rounded-lg text-xl font-semibold"
               >
-                Contact
+                Job's Response
               </NavLink>
             </li>
           </ul>
 
           <div>
             {user ? (
-              <div>
-                <IconButton onClick={handleClick}>
-                  <Avatar alt="Avatar" src={user?.profile?.profilePhoto} />
-                </IconButton>
+              <div className="flex items-center space-x-2">
+                <div className="flex flex-col cursor-pointer">
+                  <span className="md:inline font-medium underline text-base">
+                    {user?.fullName}
+                  </span>
+                  <span className="md:inline font-medium text-xs">
+                    - {user?.role}
+                  </span>
+                </div>
+                <div>
+                  <IconButton onClick={handleClick}>
+                    <Avatar alt="Avatar" src={user?.profile?.profilePhoto} />
+                  </IconButton>
 
-                <Menu
-                  anchorEl={anchorEl}
-                  open={open}
-                  onClose={handleClose}
-                  PaperProps={{
-                    elevation: 0,
-                    sx: {
-                      width: 225, // Make the menu wider
-                      overflow: "visible",
-                      filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                      mt: 1.5,
-                      "& .MuiAvatar-root": {
-                        width: 32,
-                        height: 32,
-                        ml: -0.5,
-                        mr: 1,
-                      },
-                      "&:before": {
-                        content: '""',
-                        display: "block",
-                        position: "absolute",
-                        top: 0,
-                        right: 14,
-                        width: 10,
-                        height: 10,
-                        bgcolor: "background.paper",
-                        transform: "translateY(-50%) rotate(45deg)",
-                        zIndex: 0,
-                      },
-                    },
-                  }}
-                  transformOrigin={{ horizontal: "right", vertical: "top" }}
-                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-                >
-                  <MenuItem
-                    onClick={handleClose}
-                    sx={{
-                      bgcolor: "#adb5bd",
-                      "&:hover": {
-                        bgcolor: "#6c757d",
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      elevation: 0,
+                      sx: {
+                        width: 225, // Make the menu wider
+                        overflow: "visible",
+                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                        mt: 1.5,
+                        "& .MuiAvatar-root": {
+                          width: 32,
+                          height: 32,
+                          ml: -0.5,
+                          mr: 1,
+                        },
+                        "&:before": {
+                          content: '""',
+                          display: "block",
+                          position: "absolute",
+                          top: 0,
+                          right: 14,
+                          width: 10,
+                          height: 10,
+                          bgcolor: "background.paper",
+                          transform: "translateY(-50%) rotate(45deg)",
+                          zIndex: 0,
+                        },
                       },
                     }}
+                    transformOrigin={{ horizontal: "right", vertical: "top" }}
+                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                   >
-                    <Avatar alt="Avatar" src={user?.profile?.profilePhoto} />
-                    <Typography variant="body1">{user?.fullName}</Typography>
-                  </MenuItem>
-                  <MenuItem
-                    className="flex gap-2"
-                    onClick={() => navigate("/natservices/user/profile")}
-                  >
-                    <LuUser2 size={20} />
-                    <Typography className="underline" variant="body2">
-                      My Profile
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem className="flex gap-2" onClick={handleLogout}>
-                    <LuLogOut size={20} />
-                    <Typography className="underline" variant="body2">
-                      Logout
-                    </Typography>
-                  </MenuItem>
-                </Menu>
+                    <MenuItem
+                      onClick={handleClose}
+                      sx={{
+                        bgcolor: "#adb5bd",
+                        "&:hover": {
+                          bgcolor: "#6c757d",
+                        },
+                      }}
+                    >
+                      <Avatar alt="Avatar" src={user?.profile?.profilePhoto} />
+                      <div className="flex flex-col">
+                        <Typography variant="body1">
+                          {user?.fullName}
+                        </Typography>
+                        <Typography variant="body1" sx={{ fontSize: "12px" }}>
+                          ({user?.role})
+                        </Typography>
+                      </div>
+                    </MenuItem>
+                    <MenuItem
+                      className="flex gap-2"
+                      onClick={() => navigate("/natservices/user/profile")}
+                    >
+                      <LuUser2 size={20} />
+                      <Typography className="underline" variant="body2">
+                        My Profile
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem className="flex gap-2" onClick={handleLogout}>
+                      <LuLogOut size={20} />
+                      <Typography className="underline" variant="body2">
+                        Logout
+                      </Typography>
+                    </MenuItem>
+                  </Menu>
+                </div>
               </div>
             ) : (
               <div className="flex gap-1.5">

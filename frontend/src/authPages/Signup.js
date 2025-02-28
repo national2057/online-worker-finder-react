@@ -15,7 +15,6 @@ const Signup = () => {
     phone: "",
     address: "",
     password: "",
-    //  confirmPassword: "",
     role: "customer", // default to customer
     file: "",
   });
@@ -209,14 +208,14 @@ const Signup = () => {
           {loading ? (
             <button className="flex items-center w-full my-4">
               <RiLoader4Line className="mr-2 h-4 w-4 animate-spin" />
-              <p>Please wait</p>
+              <p>Please wait...</p>
             </button>
           ) : (
             <button
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition duration-200"
             >
-              Sign Up
+              Signup
             </button>
           )}
           <p className="text-center text-gray-500 mt-4">
